@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<theme>
+   <title>Gedfácil (AR MINEIRA)</title>
+   <title-id>theme.gedfacil</title-id>
+   <css-tokens>
+      <!-- Primary colors -->
+      <token name="alf-main-background-color" value="#FFFFFF" />
+      <token name="alf-header-background-color" value="#D01012" />
+      <token name="alf-header-text-color" value="#FFFFFF" />
+      <token name="alf-header-menu-active-background-color" value="#B00D0F" />
+      
+      <!-- Buttons and links -->
+      <token name="alf-link-color" value="#D01012" />
+      <token name="alf-primary-button-background-color" value="#D01012" />
+      <token name="alf-primary-button-text-color" value="#FFFFFF" />
+   </css-tokens>
+</theme>

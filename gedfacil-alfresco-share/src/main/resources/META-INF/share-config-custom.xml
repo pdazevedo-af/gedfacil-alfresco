@@ -10,6 +10,20 @@
              alfresco/tomcat/shared/classes/alfresco/web-extension/share-config-custom.xml
      -->
 <alfresco-config>
+    <config evaluator="string-compare" condition="DocLibCustom">
+        <dependencies>
+            <js src="gedfacil/custom-dashboard.js" />
+            <css src="gedfacil/css/custom-styles.css" />
+        </dependencies>
+    </config>
+
+    <!-- Idioma fixo: Somente Português (Brasil) -->
+    <config evaluator="string-compare" condition="Languages">
+        <languages>
+            <language locale="pt_BR">Português (Brasil)</language>
+        </languages>
+    </config>
+
     <!--================================================================================================================
         Make custom types and aspects visible in "Change Type" and "Manage Aspects" actions.
          This will also make them visible when creating rules.
@@ -21,9 +35,9 @@
             <visible>
                 <aspect name="acme:securityClassified"/>
             </visible>
-            <addable> <!-- defaults to visible config -->
+            <addable>                <!-- defaults to visible config -->
             </addable>
-            <removeable> <!-- defaults to visible config -->
+            <removeable>                <!-- defaults to visible config -->
             </removeable>
         </aspects>
         <types>
@@ -48,8 +62,7 @@
                 <form labelId="search.form.label.cm_folder" descriptionId="search.form.desc.cm_folder">cm:folder</form>
 
                 <!-- Custom type -->
-                <form labelId="form.label.advancedsearch.acmeDocument"
-                      descriptionId="form.description.advancedsearch.acmeDocument">acme:document
+                <form labelId="form.label.advancedsearch.acmeDocument" descriptionId="form.description.advancedsearch.acmeDocument">acme:document
                 </form>
             </forms>
         </advanced-search>
@@ -229,8 +242,7 @@
                     <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
                         <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification" set="acmeDocSet"/>
                 </appearance>
             </form>
 
@@ -282,8 +294,7 @@
                     <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
                         <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification" set="acmeDocSet"/>
                 </appearance>
             </form>
 
@@ -320,8 +331,7 @@
                     <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
                         <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification" set="acmeDocSet"/>
                 </appearance>
             </form>
         </forms>
@@ -373,8 +383,7 @@
                     <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
                         <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification" set="acmeDocSet"/>
                 </appearance>
             </form>
             <!-- Search form -->
@@ -409,12 +418,28 @@
                     <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
                         <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification" set="acmeDocSet"/>
                 </appearance>
             </form>
         </forms>
     </config>
+    <!-- Dashboard Configuration -->
+    <config evaluator="string-compare" condition="Dashboards" replace="true">
+        <dashboards>
+            <layouts>
+                <layout id="dashboard-2-column-narrow-left" label="2 Columns (Narrow Left)" />
+            </layouts>
+        </dashboards>
+    </config>
 
+    <config evaluator="string-compare" condition="UserDashboards" replace="true">
+        <user-dashboards>
+            <layout id="dashboard-2-column-narrow-left" />
+            <dashlets>
+                <dashlet id="my-sites" grid-column="1" grid-row="1" />
+                <dashlet id="search" grid-column="2" grid-row="1" />
+            </dashlets>
+        </user-dashboards>
+    </config>
 
 </alfresco-config>

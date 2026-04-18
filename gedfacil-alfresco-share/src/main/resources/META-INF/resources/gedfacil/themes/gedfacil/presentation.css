@@ -1,0 +1,38 @@
+/* Gedfácil Theme Custom CSS */
+
+.alfresco-share .theme-company-logo {
+    background-image: url(../../images/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 40px;
+}
+
+.sticky-footer, .footer {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+    border-top: 4px solid #D01012 !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+}
+
+.footer-info div {
+    margin: 4px 0;
+}
+
+.footer a {
+    color: #FFFFFF !important;
+}
+
+.alf-header {
+    background-color: #D01012 !important;
+}
+
+.alf-header .alf-menu-bar {
+    background-color: #D01012 !important;
+}
+
+.alf-header .alf-menu-bar .alf-menu-bar-item.selected {
+    background-color: #B00D0F !important;
+}

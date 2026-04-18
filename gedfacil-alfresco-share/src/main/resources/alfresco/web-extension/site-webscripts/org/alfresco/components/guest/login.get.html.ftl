@@ -29,10 +29,8 @@
       }
       /* Fundo branco com pequenos pixels vermelhos */
       body.theme-body, body, html {
-         background-color: #ffffff !important;
-         background-image: radial-gradient(#de171a 1px, transparent 1px) !important;
-         background-size: 35px 35px !important;
-         background-attachment: fixed !important;
+         background-color: #f7f7f7 !important;
+         background-image: none !important;
       }
       .theme-overlay.login .product-community {
          display: none !important;
@@ -85,7 +83,7 @@
             <img src="${url.context}/res/gedfacil-alfresco-share/images/logomarca.png" alt="Logomarca" style="max-height: 80px; width: auto; max-width: 100%; display: block; margin: 0 auto;"/>
          </div>
          <div class="product-name">GEDfácil</div>
-         <div class="product-tagline" style="font-size: 16px; margin-top: 10px;">Armazenamento seguro e eficiente</div>
+         <div class="product-tagline" style="font-size: 16px; margin-top: 10px;">Armazenamento digital seguro e eficiente</div>
       </@markup>
       
       <#if errorDisplay == "container">
@@ -164,10 +162,6 @@
       </div>
       
       <@markup id="footer">
-      <div class="login-copy" style="text-align: center; border-top: 1px solid #ccc; padding-top: 10px; margin-top: 20px;">
-         <span style="font-size: 13px; color: #555;">Para suporte entrar em contato com (33) 4141-1771</span><br/>
-         <span style="display: block; margin-top: 8px; font-weight: bold; color: #de171a; font-size: 14px;">AR MINEIRA</span>
-      </div>
       </@markup>
    </@>
 </@>
