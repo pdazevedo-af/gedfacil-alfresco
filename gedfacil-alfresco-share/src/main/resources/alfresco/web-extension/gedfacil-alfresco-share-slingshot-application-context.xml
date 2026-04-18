@@ -19,7 +19,6 @@
       <property name="resourceBundles">
          <list>
             <value>alfresco.web-extension.messages.gedfacil-alfresco-share</value>
-            <value>alfresco.web-extension.messages.gedfacil</value>
          </list>
       </property>
    </bean>
