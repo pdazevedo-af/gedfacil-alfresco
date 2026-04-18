@@ -22,6 +22,7 @@ services:
       JAVA_OPTS: "
         -Dsolr.secureComms=secret
         -Dsolr.sharedSecret=secret
+        -Dsample.site.disabled=true
         -Dmessaging.broker.url=\"failover:(nio://gedfacil-alfresco-activemq:61616)?timeout=3000&jms.useCompression=true\"
         "
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
