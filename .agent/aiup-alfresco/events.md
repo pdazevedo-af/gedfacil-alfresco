@@ -12,14 +12,17 @@ Generate a Spring Boot Out-of-Process application that consumes Alfresco reposit
 invent a second project layout or merge event-listener code into the Platform JAR project.
 
 ## When to use
+
 Use this command for **asynchronous, reactive integrations**: notifications, external system sync, workflow triggers based on content changes.
 
 Do NOT use for:
+
 - Synchronous content validation → use `/behaviours` (In-Process)
 - REST API exposure → use `/web-scripts` (In-Process)
 - On-demand triggered logic → use `/actions` (In-Process)
 
 ## Input
+
 Read `REQUIREMENTS.md` to identify event-driven integration requirements and resolve the
 Event Handler project's `Root path` from Section 2 (Project Architecture).
 
@@ -32,40 +35,51 @@ Event Handler project's `Root path` from Section 2 (Project Architecture).
 ## Output Files
 
 ### 1. Spring Boot Application
+
 `{event-project-root}/src/main/java/{package}/{Name}Application.java`
+
 - Expected to exist already from `/scaffold`; create only if missing
 - `@SpringBootApplication`
 
 ### 2. Event Handler
+
 `{event-project-root}/src/main/java/{package}/handler/{Name}EventHandler.java`
+
 - Annotate with `@AlfrescoEventListener`
 - Filter by node type or aspect where applicable
 - Log at `INFO` level on successful processing; `ERROR` on failure
 - Configure a dead-letter queue for error handling
 
 ### 3. Application Properties
+
 `{event-project-root}/src/main/resources/application.properties`
+
 ```properties
 spring.activemq.broker-url=${SPRING_ACTIVEMQ_BROKER_URL:tcp://localhost:61616}
 spring.activemq.user=${SPRING_ACTIVEMQ_USER}
 spring.activemq.password=${SPRING_ACTIVEMQ_PASSWORD}
 alfresco.events.defaultExchangeName=alfresco.repo.event2
 ```
+
 - Expected to exist already from `/scaffold`; update only if required properties are missing
 
 ### 4. POM
+
 `{event-project-root}/pom.xml` with parent:
+
 ```xml
 <parent>
     <groupId>org.alfresco</groupId>
     <artifactId>alfresco-java-sdk</artifactId>
-    <version>7.2.0</version>
+    <version>5.2</version>
 </parent>
 ```
+
 - Expected to exist already from `/scaffold`; update only if the event starter dependency or related build config is missing
 - Include `alfresco-java-event-api-spring-boot-starter` dependency.
 
 ## Conventions
+
 - `{event-project-root}` is `.` for Event Handler only mode, or `{name}-events/` for Mixed mode
 - Consumer group naming: `{prefix}.{purpose}` — e.g. `acme.invoiceProcessor`
 - Always configure a dead-letter queue
@@ -74,7 +88,9 @@ alfresco.events.defaultExchangeName=alfresco.repo.event2
 - Never generate Spring Boot event-listener code inside a Platform JAR module or under `src/main/resources/alfresco/module/...`
 
 ## Deployment
+
 The Out-of-Process app runs as a **separate service** in `compose.yaml` alongside ACS:
+
 ```yaml
 {extension-name}:
   build: ./{event-project-root}
@@ -87,4 +103,5 @@ The Out-of-Process app runs as a **separate service** in `compose.yaml` alongsid
     alfresco:
       condition: service_healthy
 ```
+
 After generation, run `/docker-compose` to add this service to the stack.

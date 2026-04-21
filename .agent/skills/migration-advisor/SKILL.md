@@ -11,7 +11,7 @@ Scan Alfresco extension code for deprecated API usage and suggest modern replace
 ## Deprecated Patterns
 
 | Deprecated | Replacement | Since |
-|-----------|-------------|-------|
+| ----------- | ----------- | ----- |
 | `ServiceRegistry.getNodeService()` | `@Autowired NodeService` | SDK 4.x+ |
 | `AuthenticationUtil.setFullyAuthenticatedUser()` | `AuthenticationUtil.runAs()` | SDK 4.x+ |
 | Direct Hibernate session access | `NodeService` / `ContentService` | Always |
@@ -22,4 +22,5 @@ Scan Alfresco extension code for deprecated API usage and suggest modern replace
 | Lucene query syntax | AFTS or CMIS query | ACS 4.0+ |
 
 ## Output
+
 For each deprecated usage found, report: file, line, deprecated API, suggested replacement, and migration effort estimate (trivial/moderate/significant).

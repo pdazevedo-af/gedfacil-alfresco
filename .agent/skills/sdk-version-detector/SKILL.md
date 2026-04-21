@@ -20,27 +20,30 @@ Detect which Alfresco SDK the project uses and report which code generation patt
 ## SDK Types
 
 ### In-Process SDK (Maven SDK `alfresco-sdk-aggregator`)
+
 Deploys as a **Platform JAR or AMP inside the ACS JVM**.
 
 | SDK Version | ACS Version | Java | Spring | Patterns |
-|-------------|-------------|------|--------|----------|
+| ----------- | ----------- | ---- | ------ | -------- |
 | 4.x (≤4.11) | 6.x–7.x | 11 | 5.x | Legacy `ServiceRegistry`, XML-only config |
-| 4.x (4.12+) | 25.x–26.1 | 17+ | 6.x/Boot 3.x | Web Scripts, XML for integration points, Java config for internal wiring |
+| 4.x (4.12+) | 7.3.x | 17+ | 6.x/Boot 3.x | Web Scripts, XML for integration points, Java config for internal wiring |
 
 Use for: **behaviours, web scripts, actions, content model bootstrap** — anything that must run inside the Alfresco JVM.
 
 ### Out-of-Process SDK (Spring Boot SDK `alfresco-java-sdk`)
+
 Runs as a **separate Spring Boot application** outside ACS, connected via ActiveMQ and REST.
 
 | SDK Version | ACS Version | Java | Spring Boot | Patterns |
-|-------------|-------------|------|-------------|----------|
-| 7.x | 25.x–26.1 | 17+ | 3.x | `@AlfrescoEventListener`, standard Spring Boot `@Configuration` |
+| ----------- | ----------- | ---- | ----------- | -------- |
+| 5.2 | 7.3.x | 17+ | 3.x | `@AlfrescoEventListener`, standard Spring Boot `@Configuration` |
 
 Use for: **event listeners, external integrations, async processing** — anything that reacts to repository events over ActiveMQ.
 
 ## Output
 
 Report:
+
 - Extension type: **In-Process** or **Out-of-Process**
 - Detected SDK and version
 - Detected ACS version

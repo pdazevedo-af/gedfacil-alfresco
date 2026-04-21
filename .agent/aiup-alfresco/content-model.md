@@ -9,6 +9,7 @@ argument-hint: "[path to REQUIREMENTS.md or description]"
 Generate Alfresco content model files based on requirements.
 
 ## Input
+
 Read `REQUIREMENTS.md` (or use "$ARGUMENTS" as input) to extract content model requirements and
 resolve the Platform JAR project's `Root path` from Section 2 (Project Architecture).
 
@@ -18,6 +19,7 @@ resolve the Platform JAR project's `Root path` from Section 2 (Project Architect
 ## Output Files
 
 ### 1. Content Model XML
+
 Create `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/model/content-model.xml`:
 
 ```xml
@@ -37,6 +39,7 @@ Create `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/m
 ```
 
 ### 2. Spring Context
+
 Create `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/context/bootstrap-context.xml`:
 
 ```xml
@@ -55,6 +58,7 @@ Create `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/c
 ```
 
 ### 3. Model Constants Interface
+
 Create `{platform-project-root}/src/main/java/{package}/model/{Name}Model.java`:
 
 ```java
@@ -89,6 +93,7 @@ public interface {Name}Model {
 ```
 
 **Rules:**
+
 - Generate one `QName` constant per type, aspect, property, and association declared in the model
 - Constant name format: `{KIND}_{LOCAL_NAME_IN_UPPER_SNAKE_CASE}` where `KIND` is `TYPE`, `ASPECT`, `PROP`, or `ASSOC`
 - This is a Java `interface` — all fields are implicitly `public static final`; do NOT use `class`
@@ -98,6 +103,7 @@ public interface {Name}Model {
 - Never expose this interface as a Spring bean — it is a pure Java constant holder
 
 ## Conventions
+
 - `{platform-project-root}` is `.` for Platform JAR only mode, or `{name}-platform/` for Mixed mode
 - Follow namespace naming from AGENTS.md
 - Use `cm:content` as default parent for document types
@@ -107,4 +113,5 @@ public interface {Name}Model {
 - Never generate content model files inside the Event Handler project
 
 ## Validation
+
 After generating files, invoke the `content-model-validator` skill to validate the output.

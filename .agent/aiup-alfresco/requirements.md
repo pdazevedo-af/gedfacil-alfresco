@@ -43,7 +43,7 @@ structure.
 **Project-selection rules** (use to populate Section 2 — Project Architecture):
 
 | Need | Add this project |
-|------|------------------|
+| ---- | ---------------- |
 | Same-transaction repository logic, ACS-hosted REST/Web Script, or workflow | **Platform JAR** |
 | Legacy Share-tier UI customization | **Share JAR** |
 | Asynchronous event-driven processing | **Event Handler** |
@@ -53,6 +53,7 @@ structure.
 > **UI note**: If Q4 is Yes but Q5 says the target should be ACA/ADF/custom frontend instead of Share, do **not** add a Share project. Record that decision explicitly in the requirements and keep the UI outside this repository unless other requirements justify repository-side code.
 
 **Important:** **Mixed** means **two or more separate projects/deployables** in the same repository:
+
 - a Platform JAR / AMP loaded by ACS, when repository-side code is needed
 - a Share JAR / AMP loaded by Share, when Share-tier UI customization is needed
 - a standalone Spring Boot Event Handler service, when async processing is needed
@@ -67,24 +68,26 @@ and event-listener code all mixed together.
 Create a file called `REQUIREMENTS.md` in the project root with:
 
 ### 1. Overview
+
 - Extension name
 - Business purpose (1-2 sentences)
-- Target ACS version (from AGENTS.md or default 26.1)
+- Target ACS version (from AGENTS.md or default 7.3.x)
 
 ### 2. Project Architecture
 
 Derived from the architecture decision above. Every subsequent section must
 reference which project each requirement belongs to.
 
-```
+```text
 | Project | Type | SDK | Root path | Purpose |
 |---------|------|-----|-----------|---------|
 | `{name}-platform` | Platform JAR | alfresco-sdk-aggregator 4.15.0 | `{name}-platform/` (or `.` if only project) | Synchronous behaviours, web scripts, content model |
 | `{name}-share`    | Share JAR    | Maven JAR (Share web-tier addon) | `{name}-share/` (or `.` if only project) | Share forms, Surf pages, Aikau, evaluators |
-| `{name}-events`   | Event Handler | alfresco-java-sdk 7.2.0   | `{name}-events/`   (omit if not needed)     | Async event-driven processing |
+| `{name}-events`   | Event Handler | alfresco-java-sdk 5.2   | `{name}-events/`   (omit if not needed)     | Async event-driven processing |
 ```
 
 Rules:
+
 - Include only the projects the feature actually needs.
 - When there is only one project, its root path is `.` (the repo root), not a subdirectory.
 - When multiple projects exist, they are siblings under the repo root and built by a top-level aggregator POM.
@@ -92,29 +95,38 @@ Rules:
 - The `Root path` column is authoritative for all downstream commands; every generated file must be written under the matching project root, never under the other project's root.
 
 ### 3. User Stories
+
 For each requirement, write a user story:
-```
+
+```text
 As a [role], I want to [action], so that [benefit].
 ```
 
 ### 4. Acceptance Criteria
+
 For each user story, list testable acceptance criteria:
-```
+
+```text
 Given [context], when [action], then [expected result].
 ```
 
 ### 5. Content Model Requirements
-*(Platform JAR only — omit section if no Platform JAR)*
+
+> Note: Platform JAR only — omit section if no Platform JAR
+
 - Custom types needed (with parent type)
 - Custom aspects needed
 - Properties for each type/aspect (name, data type, mandatory, constraints)
 - Associations (if any)
 
 ### 6. API Requirements
-*(Platform JAR only — omit section if no Platform JAR)*
+
+> Note: Platform JAR only — omit section if no Platform JAR
+
 - Web Scripts needed (method, URL pattern, request/response)
 
 ### 7. Behaviour Requirements
+
 - **In-process behaviours** *(Platform JAR)*: Policies/behaviours to trigger on node events synchronously; actions to register
 - **Share UI requirements** *(Share JAR)*:
   - Share forms and `share-config-custom.xml` needs
@@ -132,12 +144,14 @@ Given [context], when [action], then [expected result].
   - Workflow content model namespace and prefix (convention: `{prefix}wf`)
 
 ### 8. Deployment Requirements
+
 - Docker Compose services needed
 - Environment-specific configuration
 
 ### 9. Traceability Matrix
+
 | Requirement ID | Project | User Story | Content Model | API | Behaviour / Handler | Workflow | Test |
-|---------------|---------|------------|---------------|-----|---------------------|----------|------|
+| ------------- | ------- | ---------- | ------------- | --- | ------------------- | -------- | ---- |
 
 Leave the Test column empty — it will be filled by `/test`.
 Add a **Project** column so each row is clearly tied to a specific project.
@@ -145,6 +159,7 @@ Add a **Project** column so each row is clearly tied to a specific project.
 ---
 
 ## Instructions
+
 - Ask the architecture questions before writing any section if the description is ambiguous
 - Default to Platform JAR packaging; use AMP only when the extension must bundle third-party libraries not already on the Alfresco classpath
 - Treat Share-tier UI work as a separate deployable when the request explicitly targets Share

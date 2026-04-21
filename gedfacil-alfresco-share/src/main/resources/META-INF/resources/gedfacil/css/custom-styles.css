@@ -1,25 +1,7 @@
-/* Centralização e Estilo do Rodapé Gedfácil */
+/* =============================================================================
+   GEDfácil - Custom Styles
+   Estilos globais aplicados independentemente do tema selecionado
+   ============================================================================= */
 
-.sticky-footer, .footer {
-    background-color: #333333 !important;
-    color: #FFFFFF !important;
-    border-top: 4px solid #de171a !important;
-    text-align: center !important;
-    font-size: 14px !important;
-    padding: 10px 0 !important;
-    height: auto !important;
-    min-height: 40px !important;
-}
-
-.footer-info {
-    display: inline-block;
-}
-
-.footer-info div {
-    margin: 4px 0;
-    line-height: 1.4;
-}
-
-.footer a, .footer .copyright span {
-    color: #FFFFFF !important;
-}
+/* Note: Styling moved to presentation.css to leverage theme-specific rules properly 
+   and avoid duplicating footers or over-riding the main header logo bar. */

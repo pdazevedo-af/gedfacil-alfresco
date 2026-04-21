@@ -7,7 +7,7 @@ argument-hint: "[path to REQUIREMENTS.md or description]"
 # /workflow — Workflow Generator
 
 > **In-Process SDK only** — Activiti workflows deploy inside the ACS JVM as part of the Platform JAR.
-> Share UI form configuration is out of scope for ACS 26.1 (use ADF/ACA for task forms). The generated workflow is fully operable via the Alfresco Workflow REST API v1.
+> Share UI form configuration is out of scope for ACS 7.3.x (use ADF/ACA for task forms). The generated workflow is fully operable via the Alfresco Workflow REST API v1.
 
 Generate Alfresco Activiti workflow artefacts from requirements.
 
@@ -38,6 +38,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ## Output Files
 
 ### 1. BPMN Process Definition
+
 `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/workflow/{processName}.bpmn`
 
 ```xml
@@ -220,6 +221,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ```
 
 **BPMN generation rules:**
+
 - Always include `xmlns:activiti="http://activiti.org/bpmn"` on the root `<definitions>` element
 - `<process id="...">` must have both `id` (camelCase) and `name` (human-readable) and `isExecutable="true"`
 - User tasks must have either `activiti:assignee` or `activiti:candidateGroups` — never both, never neither
@@ -233,6 +235,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ---
 
 ### 2. Workflow Task Content Model
+
 `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/model/{processName}-workflow-model.xml`
 
 ```xml
@@ -319,6 +322,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ```
 
 **Workflow model rules:**
+
 - Always import `bpm` namespace — workflow task types extend `bpm:startTask` or `bpm:activitiOutcomeTask`
 - Use `bpm:startTask` as parent for the start task only
 - Use `bpm:activitiOutcomeTask` for all user tasks that have outcome decisions
@@ -330,6 +334,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ---
 
 ### 3. Bootstrap Registration
+
 `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/context/bootstrap-context.xml`
 
 **If the file already exists** (created by `/content-model`): read it and append the `workflowBootstrap` bean. Check whether a `{prefix}.workflowBootstrap` bean already exists — if so, add only the new `<props>` block inside the existing `workflowDefinitions` list and the new model/label entries; do not create a duplicate bean ID.
@@ -369,6 +374,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ---
 
 ### 4. i18n Message Bundle
+
 `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/messages/{processName}Workflow.properties`
 
 ```properties
@@ -390,6 +396,7 @@ Read `REQUIREMENTS.md` to identify workflow requirements:
 ---
 
 ### 5. Java Task Listener (optional)
+
 `{platform-project-root}/src/main/java/{package}/workflow/{Name}TaskListener.java`
 
 Generate only when requirements explicitly call for a Java-based task listener (e.g. sending email, calling an external service, complex conditional logic that exceeds inline script capability).
@@ -447,6 +454,7 @@ public class {Name}TaskListener implements TaskListener {
 ```
 
 Register in the BPMN:
+
 ```xml
 <activiti:taskListener event="create" class="{package}.workflow.{Name}TaskListener"/>
 ```
@@ -456,7 +464,7 @@ Register in the BPMN:
 ## Conventions
 
 | Item | Rule |
-|------|------|
+| ---- | ---- |
 | `{platform-project-root}` | `.` for Platform JAR only mode; `{name}-platform/` for Mixed mode |
 | `{prefix}wf` | Workflow-specific namespace sub-prefix; derived from the content model prefix |
 | Process variable names | Always underscore form (`{prefix}wf_{propName}`) in BPMN — never colon |
@@ -467,7 +475,7 @@ Register in the BPMN:
 
 ## Workflow Position in Command Chain
 
-```
+```text
 /requirements → /scaffold → /content-model → /workflow → /behaviours → /web-scripts → /actions → /events → /docker-compose → /test
 ```
 

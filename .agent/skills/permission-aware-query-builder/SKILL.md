@@ -18,4 +18,5 @@ Review generated query code for potential ACL bypass issues.
 6. **Solr AFTS queries** — respect `fts.alfresco.defaultNamespace` setting; warn if queries hardcode node refs
 
 ## Output
+
 Flag each potential ACL bypass with severity (high/medium/low), explanation, and suggested fix.

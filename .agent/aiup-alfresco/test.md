@@ -9,6 +9,7 @@ argument-hint: "[path to REQUIREMENTS.md or description]"
 Generate tests for the Alfresco extension.
 
 ## Input
+
 Read `REQUIREMENTS.md` and all generated artefacts from previous commands.
 Resolve the project `Root path` values from Section 2 (Project Architecture) before writing tests.
 
@@ -23,6 +24,7 @@ Resolve the project `Root path` values from Section 2 (Project Architecture) bef
 ### In-Process SDK (Maven) — Platform JAR / AMP
 
 #### 1. Testcontainers Integration Test
+
 `{platform-project-root}/src/test/java/{package}/{Name}ContainerIT.java`
 
 Self-contained: starts the ACS stack from `compose.yaml` via `DockerComposeContainer`, runs all
@@ -73,6 +75,7 @@ public class {Name}ContainerIT {
 - Create isolated test folder trees in `@BeforeAll`; permanently delete them in `@AfterAll`.
 
 #### 2. External ACS Integration Test (optional)
+
 `{platform-project-root}/src/test/java/{package}/{Name}IT.java`
 
 Runs against an already-running ACS instance when `-Dacs.endpoint.path=` is provided.
@@ -88,7 +91,9 @@ void setup() throws Exception {
 ```
 
 #### 3. HTTP API Smoke Tests
+
 `{platform-project-root}/http-tests/{extension-name}.sh`
+
 - Plain shell scripts using `curl` + `jq`
 - Cover: happy path, validation errors (400), not found (404), unauthorized (401)
 - Use environment variables for `HOST`, `USERNAME`, `PASSWORD`
@@ -197,6 +202,7 @@ void cleanupWorkflows() throws Exception {
 ```
 
 **Workflow test conventions:**
+
 - Always discover `processDefinitionId` via `GET /process-definitions?name={processName}` — never hardcode the version suffix (`:1:104`)
 - Use `POST /tasks/{taskId}` with `"action": "complete"` — not legacy patterns
 - Workflow variable names in the REST API use the **underscore form** (`{prefix}wf_{propName}`) — matches Alfresco's colon→underscore mapping
@@ -349,6 +355,7 @@ curl -s -o /dev/null -w '%{http_code}' "$HOST/share/page/$PAGE_ID" | grep -qE '^
 
 > **macOS one-time setup**: Docker Desktop 29.x rejects Docker API versions below 1.40.
 > The `<environmentVariables>` block above covers CI, but local developer machines also need:
+>
 > ```bash
 > echo "api.version=1.44" >> ~/.docker-java.properties
 > cat > ~/.testcontainers.properties <<'EOF'
@@ -356,9 +363,11 @@ curl -s -o /dev/null -w '%{http_code}' "$HOST/share/page/$PAGE_ID" | grep -qE '^
 > docker.client.strategy=org.testcontainers.dockerclient.UnixSocketClientProviderStrategy
 > EOF
 > ```
+>
 > See the *Docker Desktop on macOS — Testcontainers Compatibility* section in `AGENTS.md` for details.
 
 **Run commands**:
+
 ```bash
 # Self-contained (Docker required, port 8080 must be free)
 mvn verify
@@ -378,12 +387,16 @@ mvn package -DskipITs
 ### Out-of-Process SDK (Spring Boot) — Event Listeners
 
 #### 1. Unit Tests
+
 `{event-project-root}/src/test/java/{package}/handler/{Name}EventHandlerTest.java`
+
 - JUnit 5 + Mockito
 - Mock `AlfrescoEvent` payloads and verify handler logic in isolation
 
 #### 2. Integration Test
+
 `{event-project-root}/src/test/java/{package}/{Name}IT.java`
+
 - Use an embedded ActiveMQ broker (`@EmbeddedActiveMQ`) or Testcontainers
 - Publish a synthetic event, verify the handler processes it correctly
 - Assert any side effects (external calls, state changes)
@@ -391,10 +404,12 @@ mvn package -DskipITs
 ---
 
 ### Update Traceability
+
 Update the Traceability Matrix in `REQUIREMENTS.md` with test references pointing to the
 generated test class and method names.
 
 ## Conventions
+
 - `{platform-project-root}` is `.` for Platform JAR only mode, or `{name}-platform/` for Mixed mode
 - `{event-project-root}` is `.` for Event Handler only mode, or `{name}-events/` for Mixed mode
 - `{compose-file-relative-path}` is `compose.yaml` for single-project layouts and typically `../compose.yaml` for child modules in Mixed mode

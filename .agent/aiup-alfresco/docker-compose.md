@@ -1,7 +1,7 @@
 ---
 description: "Generate a Docker Compose file with full ACS stack."
 allowed-tools: "Read, Write, Grep, Glob"
-argument-hint: "[ACS version, e.g. 26.1]"
+argument-hint: "[ACS version, e.g. 7.3.x]"
 ---
 
 # /docker-compose — Docker Compose Generator
@@ -9,32 +9,38 @@ argument-hint: "[ACS version, e.g. 26.1]"
 Generate a complete `compose.yaml` for an Alfresco Content Services stack.
 
 ## Input
+
 - ACS version from "$ARGUMENTS" or default to 7.3
 - Read `REQUIREMENTS.md` for any deployment-specific requirements
 - Resolve the `Root path` values from Section 2 (Project Architecture)
 
 ## Output File
+
 `compose.yaml` at project root.
 
 ## Required Services
 
 ### Core
+
 - `alfresco` — ACS repository (with extension JAR mounted or built into image)
 - `postgres` — PostgreSQL database
 - `activemq` — Apache ActiveMQ message broker
 
 ### Transform
+
 - `transform-core-aio` — All-in-one Transform Service
 
 - `solr6` — for Solr-based search
 
 ### Optional
+
 - `share` — Share UI (if content model forms are needed)
 - `proxy` — Nginx or similar reverse proxy
 - `content-app` — Alfresco Content App (ACA)
 - `{extension-name}` — Out-of-Process Spring Boot app (if `/events` command was used)
 
 ## Conventions
+
 - Use Docker Compose v2 format (no `version:` key)
 - Every service must have a `healthcheck`
 - Use `condition: service_healthy` in `depends_on`
@@ -51,13 +57,13 @@ Generate a complete `compose.yaml` for an Alfresco Content Services stack.
 
 ## Canonical Image Tags (ACS 7.3 Community)
 
-```
-alfresco/alfresco-content-repository-community:7.3.0
-alfresco/alfresco-share:7.3.0
-alfresco/alfresco-search-services:2.0.x
-postgres:14.4
-docker.io/alfresco/alfresco-activemq:5.17.x
-alfresco/alfresco-transform-core-aio:3.1.x
+```text
+alfresco/alfresco-content-repository-community:7.3.x
+alfresco/alfresco-share:7.3.x
+alfresco/alfresco-search-services:2.0.15
+postgres:16.5
+docker.io/alfresco/alfresco-activemq:5.18
+alfresco/alfresco-transform-core-aio:3.0.x
 nginx:stable-alpine
 ```
 
@@ -126,4 +132,5 @@ alfresco:
 > Omitting `JAVA_TOOL_OPTIONS` entirely fails with `02240000 Unable to get secret key: no key information is provided`.
 
 ## Validation
+
 After generation, invoke `docker-compose-healthcheck-injector` skill.

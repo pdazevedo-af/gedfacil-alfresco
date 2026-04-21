@@ -12,6 +12,7 @@ argument-hint: "[path to REQUIREMENTS.md or description]"
 Generate Alfresco behaviour classes for synchronous node event handling.
 
 ## Input
+
 Read `REQUIREMENTS.md` to identify behaviour requirements and resolve the Platform JAR
 project's `Root path` from Section 2 (Project Architecture).
 
@@ -21,15 +22,19 @@ project's `Root path` from Section 2 (Project Architecture).
 ## Output Files
 
 ### 1. Behaviour Class
+
 `{platform-project-root}/src/main/java/{package}/behaviour/{Name}Behaviour.java`
+
 - Implement appropriate policy interface (`OnCreateNodePolicy`, `OnUpdatePropertiesPolicy`, `OnAddAspectPolicy`, etc.)
 - Register behaviour in `init()` method using `PolicyComponent`
 - Inject required Alfresco services
 
 ### 2. Spring Bean Configuration
+
 Add bean definition to `{platform-project-root}/src/main/resources/alfresco/module/{module-id}/context/service-context.xml`
 
 ## Conventions
+
 - `{platform-project-root}` is `.` for Platform JAR only mode, or `{name}-platform/` for Mixed mode
 - Use `JavaBehaviour` with `NotificationFrequency.TRANSACTION_COMMIT` (default) or `EVERY_EVENT` where specified
 - Bind to specific types/aspects from the content model
@@ -61,7 +66,7 @@ The `@variable` / `@{namespace}property` notation belongs to the Lucene query pa
 In AFTS, reference properties directly by their prefixed name: `prefix:property`.
 
 | Lucene (forbidden) | AFTS equivalent |
-|--------------------|-----------------|
+| ------------------ | --------------- |
 | `@cm\\:name:"foo"` | `cm:name:"foo"` |
 | `@{http://…/content/1.0}name:"foo"` | `cm:name:"foo"` |
 | `TYPE:"cm:content"` | *(same in AFTS — TYPE keyword is shared)* |
@@ -76,7 +81,7 @@ Solr), the query syntax for property matching **must** use the `=` exact-match p
 // CORRECT — IDENTIFIER/exact-match mode, supported by the DB query engine
 "=vc\\:responsibleDepartment:\"IT\""
 
-// WRONG — phrase mode (DEFAULT analysis), throws QueryModelException in ACS 26.1
+// WRONG — phrase mode (DEFAULT analysis), throws QueryModelException in ACS 7.3.x
 "vc\\:responsibleDepartment:\"IT\""
 ```
 

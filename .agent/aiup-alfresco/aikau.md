@@ -1,4 +1,5 @@
 ---
+
 description: "Generate Share Aikau page and dashlet artefacts for legacy Share UI customizations."
 allowed-tools: "Read, Write, Grep, Glob"
 argument-hint: "[path to REQUIREMENTS.md or description]"

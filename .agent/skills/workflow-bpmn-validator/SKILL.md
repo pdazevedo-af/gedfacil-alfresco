@@ -13,7 +13,7 @@ Validate the given Alfresco Activiti BPMN process definition (and companion work
 - Root element must be `<definitions>` with BPMN 2.0 namespace:
   `xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"`
 - **REQUIRED**: `xmlns:activiti="http://activiti.org/bpmn"` — must be present; Alfresco Activiti extensions use this namespace
-- **ERROR if present**: Any `org.flowable.*` class reference in `class` attributes of `<activiti:taskListener>`, `<activiti:executionListener>`, or `<serviceTask activiti:class="...">`. ACS 26.1 uses Activiti 5.22.x; the Flowable API is not on the classpath.
+- **ERROR if present**: Any `org.flowable.*` class reference in `class` attributes of `<activiti:taskListener>`, `<activiti:executionListener>`, or `<serviceTask activiti:class="...">`. ACS 7.3.x uses Activiti 5.22.x; the Flowable API is not on the classpath.
 
 ## Process Structure Validation
 
@@ -65,14 +65,16 @@ If a companion `*-workflow-model.xml` exists in the same module's `model/` direc
 ## Bootstrap Registration Check
 
 If a `bootstrap-context.xml` exists in the module's `context/` directory:
+
 - **WARNING** if it contains a `<bean>` with `parent="dictionaryModelBootstrap"` that lists a `.bpmn` file in its `models` property — BPMN files must be registered via `parent="workflowDeployer"`, not `dictionaryModelBootstrap`
 - **WARNING** if the `workflowDeployer` bean has `<prop key="redeploy">true</prop>` — this causes duplicate process definitions on every restart
 
 ## Output
 
 Report all violations with:
+
 - File path and element ID (BPMN) or type name (workflow model)
 - Rule violated
 - Suggested fix
 
-If no violations are found, confirm: "BPMN and workflow model are valid for ACS 26.1 / Activiti 5.x."
+If no violations are found, confirm: "BPMN and workflow model are valid for ACS 7.3.x / Activiti 5.x."
