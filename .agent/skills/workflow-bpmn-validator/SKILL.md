@@ -67,7 +67,7 @@ If a companion `*-workflow-model.xml` exists in the same module's `model/` direc
 If a `bootstrap-context.xml` exists in the module's `context/` directory:
 
 - **WARNING** if it contains a `<bean>` with `parent="dictionaryModelBootstrap"` that lists a `.bpmn` file in its `models` property — BPMN files must be registered via `parent="workflowDeployer"`, not `dictionaryModelBootstrap`
-- **WARNING** if the `workflowDeployer` bean has `<prop key="redeploy">true</prop>` — this causes duplicate process definitions on every restart
+- **ERROR** if the `workflowDeployer` bean has `<prop key="redeploy">true</prop>` — this causes duplicate process definitions on every restart. Always set to `false`.
 
 ## Output
 

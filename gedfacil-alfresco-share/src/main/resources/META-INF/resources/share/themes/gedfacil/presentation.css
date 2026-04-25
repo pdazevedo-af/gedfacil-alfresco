@@ -1,204 +1,21 @@
 /* =============================================================================
-   Gedfácil Theme - presentation.css
-   Tema visual GEDfácil (AR MINEIRA) para Alfresco Share
-   Padrão: fundo cinza escuro (#565555ed) com barra vermelha (#de171a) de acento
+   GEDfácil Custom Theme
+   Location: META-INF/resources/share/themes/gedfacil/presentation.css
    ============================================================================= */
 
-/* --- Logo do tema --- */
-.alfresco-share .theme-company-logo {
-    background-image: url(images/logo.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 200px;
-    height: 40px;
+@import url("../light-theme/presentation.css");
+
+/* Header Customization */
+.alfresco-share .theme-header {
+    background-color: #333333;
 }
 
-/* =============================================================================
-   HEADER - Fundo cinza escuro com barra vermelha inferior (espelha o footer)
-   ============================================================================= */
-
-/* Somente a barra de MENU com fundo cinza escuro e borda inferior vermelha */
-.alf-menu-bar,
-.alfresco-header-AlfMenuBar,
-.alfresco-menus-AlfMenuBar,
-#HEADER_APP_MENU_BAR {
-    background-color: #565555 !important;
-    border-bottom: 4px solid #de171a !important;
+.alfresco-share .theme-color-1 {
+    color: #ffffff;
 }
 
-/* Menu bar dentro do header */
-.alf-header .alf-menu-bar,
-.alfresco-header-AlfMenuBar,
-.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar {
-    background-color: #565555 !important;
-}
-
-/* Itens do menu - estado normal */
-.alf-header .alf-menu-bar .alf-menu-bar-item,
-.alfresco-header-AlfMenuBar .alf-menu-bar-item,
-.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item {
-    color: #FFFFFF !important;
-}
-
-/* Itens do menu - hover */
-.alf-header .alf-menu-bar .alf-menu-bar-item:hover,
-.alfresco-header-AlfMenuBar .alf-menu-bar-item:hover,
-.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item:hover {
-    background-color: #6b6a6a !important;
-}
-
-/* Itens do menu - selecionado/ativo */
-.alf-header .alf-menu-bar .alf-menu-bar-item.selected,
-.alfresco-header-AlfMenuBar .alf-menu-bar-item.selected,
-.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item.selected,
-.alf-header .alf-menu-bar .alf-menu-bar-item.alf-selected-item,
-.alfresco-header-AlfMenuBar .alf-menu-bar-item.alf-selected-item {
-    background-color: #444444 !important;
-}
-
-/* Dropdown menus do header */
-.alf-header .dijitMenuPopup,
-.alfresco-header-AlfHeader .dijitMenuPopup,
-.alf-header .alf-menu-group,
-.alfresco-header-AlfHeader .alf-menu-group {
-    background-color: #565555 !important;
-    border: 1px solid #6b6a6a !important;
-}
-
-/* Itens dentro dos dropdowns */
-.alf-header .alf-menu-group .alf-menu-group-item,
-.alfresco-header-AlfHeader .alf-menu-group .alf-menu-group-item {
-    color: #FFFFFF !important;
-}
-
-.alf-header .alf-menu-group .alf-menu-group-item:hover,
-.alfresco-header-AlfHeader .alf-menu-group .alf-menu-group-item:hover {
-    background-color: #6b6a6a !important;
-}
-
-/* Links e texto do header */
-.alf-header a,
-.alfresco-header-AlfHeader a,
-#HEADER_BAR a {
-    color: #FFFFFF !important;
-}
-
-/* Barra de título / navegação secundária */
-.alf-header .share-header-title,
-.alfresco-header-AlfHeader .share-header-title,
-#HEADER_TITLE_BAR {
-    background-color: #4a4949 !important;
-}
-
-/* User menu / Avatar area no header */
-.alf-header .alf-user-menu,
-.alfresco-header-AlfHeader .alf-user-menu {
-    color: #FFFFFF !important;
-}
-
-/* Barra de pesquisa no header */
-.alf-header .alf-search-bar,
-.alfresco-header-AlfHeader .alfresco-header-SearchBox {
-    background-color: #6b6a6a !important;
-    border-color: #7a7979 !important;
-}
-
-/* =============================================================================
-   FOOTER - Fundo cinza escuro com barra vermelha superior
-   ============================================================================= */
-
-/* FOOTER REMOVIDO DAQUI
-   Os estilos de footer residem em footer.get.html.ftl exclusivamenete para evitar 
-   duplicação com o .sticky-footer nativo.
-*/
-
-/* =============================================================================
-   BODY E GERAL
-   ============================================================================= */
-
-body, html, body.yui-skin-sam, body.theme-body {
-    background-color: #f7f7f7 !important;
-}
-
-/* =============================================================================
-   DASHLETS (Painéis)
-   ============================================================================= */
-
-.dashlet {
-    border: 1px solid #d3d3d3;
-    border-radius: 4px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-}
-
-.dashlet .title {
-    background-color: #565555 !important;
-    color: #FFFFFF !important;
-    border-bottom: 3px solid #de171a !important;
-    padding: 10px 15px !important;
-    border-radius: 4px 4px 0 0;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-/* =============================================================================
-   BOTÕES (Primários e Padrão YUI)
-   ============================================================================= */
-
-/* Botões primários (Salvar, Criar, etc) */
-.yui-button.yui-submit-button,
-.yui-button.yui-submit-button button,
-.alf-primary-button,
-.alf-primary-button .dijitButtonNode {
-    background-color: #de171a !important;
-    background-image: none !important;
-    border-color: #aa1012 !important;
-    color: #FFFFFF !important;
-    text-shadow: none !important;
-    border-radius: 4px !important;
-}
-
-.yui-button.yui-submit-button:hover,
-.yui-button.yui-submit-button button:hover,
-.alf-primary-button:hover,
-.alf-primary-button .dijitButtonNode:hover {
-    background-color: #aa1012 !important;
-    border-color: #880d0e !important;
-}
-
-/* Botões secundários (Cancelar, Voltar) */
-.yui-button,
-.yui-button button {
-    border-radius: 4px;
-}
-
-/* =============================================================================
-   DOCUMENT LIBRARY & TABELAS
-   ============================================================================= */
-
-.yui-dt-data tr.yui-dt-even {
-    background-color: #ffffff;
-}
-
-.yui-dt-data tr.yui-dt-odd {
-    background-color: #fcfcfc;
-}
-
-/* Seleção de linha */
-.yui-dt-data tr.yui-dt-selected {
-    background-color: rgba(222, 23, 26, 0.1) !important;
-}
-
-/* Reduzir azul dos links e padronizar com a marca onde fizer sentido ou cinza escuro neutro */
-.share-document-library a, 
-.site-dashboard a {
-    color: #565555;
-    text-decoration: none;
-}
-
-.share-document-library a:hover, 
-.site-dashboard a:hover {
-    color: #de171a;
-    text-decoration: underline;
+/* Footer Customization */
+.footer {
+    border-top: 1px solid #dddddd;
+    background-color: #f5f5f5;
 }

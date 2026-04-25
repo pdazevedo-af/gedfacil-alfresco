@@ -1,0 +1,55 @@
+<alfresco-config>
+   <!-- Global config section -->
+   <config evaluator="string-compare" condition="WebFramework">
+      <web-framework>
+         <!-- 
+            The Share theme to use.
+            Note: The theme ID must match the directory name in META-INF/resources/share/themes/
+         -->
+         <dojo-pages>
+            <packages>
+               <package name="gedfacil" location="gedfacil"/>
+            </packages>
+         </dojo-pages>
+      </web-framework>
+   </config>
+
+   <!-- 
+      Appearance configuration 
+      This is where we register the custom logo and theme settings
+   -->
+   <config evaluator="string-compare" condition="GedFacilBranding">
+      <logo>/res/gedfacil/images/logo.png</logo>
+   </config>
+
+   <!-- Document Library Config Section -->
+   <config evaluator="string-compare" condition="DocumentLibrary">
+      <types>
+         <type name="cm:content">
+            <subtype name="gf:document" />
+         </type>
+         <type name="gf:document">
+         </type>
+      </types>
+   </config>
+
+   <!-- Forms Config Section -->
+   <config evaluator="node-type" condition="gf:document">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+               <show id="gf:documentId" />
+               <show id="gf:securityClassification" />
+            </field-visibility>
+            <appearance>
+               <set id="gedfacil" appearance="bordered-panel" label-id="set.gedfacil" />
+               <field id="gf:documentId" set="gedfacil" />
+               <field id="gf:securityClassification" set="gedfacil" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+</alfresco-config>

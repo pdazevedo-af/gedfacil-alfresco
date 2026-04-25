@@ -44,8 +44,8 @@ Validate the given Alfresco content model XML against these rules:
 
 ## Spring Context Validation
 
-- If a companion `*-context.xml` exists, verify it registers the model via `<bean class="org.alfresco.repo.dictionary.DictionaryBootstrap">` or equivalent
-- The `models` property must reference the correct model XML path
+- If a companion `*-context.xml` exists, verify it registers the model via `<bean class="org.alfresco.repo.dictionary.DictionaryBootstrap">` or using the parent `dictionaryModelBootstrap`.
+- The `models` property must reference the correct model XML path.
 
 ## Output
 

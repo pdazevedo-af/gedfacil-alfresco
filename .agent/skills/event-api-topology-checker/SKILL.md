@@ -28,9 +28,10 @@ Valid event types from `org.alfresco.event.sdk.model.v1`:
 
 ## Configuration Validation
 
-- Verify `spring.activemq.broker-url` is set
-- Verify event filters match expected node types/aspects
-- Warn if no error handling or dead-letter queue is configured
+- Verify `spring.activemq.broker-url` is set.
+- Verify `SPRING_ACTIVEMQ_USER` and `SPRING_ACTIVEMQ_PASSWORD` are used for authentication (matching `ACTIVEMQ_USER` / `ACTIVEMQ_PASSWORD` in compose).
+- Verify event filters match expected node types/aspects.
+- Warn if no error handling or dead-letter queue is configured.
 
 ## Output
 

@@ -1,0 +1,23 @@
+<extension>
+    <modules>
+        <module>
+            <id>Gedfacil Dashboard Customizations</id>
+            <version>1.0</version>
+            <auto-deploy>true</auto-deploy>
+            <customizations>
+                <customization>
+                    <targetPackageRoot>org.alfresco.header</targetPackageRoot>
+                    <sourcePackageRoot>com.gedfacil.header</sourcePackageRoot>
+                </customization>
+                <customization>
+                    <targetPackageRoot>org.alfresco.share.header</targetPackageRoot>
+                    <sourcePackageRoot>com.gedfacil.header</sourcePackageRoot>
+                </customization>
+                <customization>
+                    <targetPackageRoot>org.alfresco.components.dashboard</targetPackageRoot>
+                    <sourcePackageRoot>com.gedfacil.dashboard</sourcePackageRoot>
+                </customization>
+            </customizations>
+        </module>
+    </modules>
+</extension>

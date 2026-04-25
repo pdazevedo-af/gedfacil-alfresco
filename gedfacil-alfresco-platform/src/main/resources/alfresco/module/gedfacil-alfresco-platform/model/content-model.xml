@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model name="acme:contentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<model name="gf:contentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
 
     <!-- Optional meta-data about the model -->
-    <description>Sample Document Model</description>
-    <author>My Name</author>
+    <description>GEDfácil Document Model</description>
+    <author>GEDfácil Team</author>
     <version>1.0</version>
 
     <imports>
@@ -15,13 +15,13 @@
         <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
     </imports>
 
-    <!-- Custom namespace for the ACME company -->
+    <!-- Custom namespace for GEDfácil -->
     <namespaces>
-        <namespace uri="http://www.acme.org/model/content/1.0" prefix="acme"/>
+        <namespace uri="http://www.gedfacil.com/model/gf/1.0" prefix="gf"/>
     </namespaces>
 
     <constraints>
-        <constraint name="acme:securityClassificationOptions" type="LIST">
+        <constraint name="gf:securityClassificationOptions" type="LIST">
             <parameter name="allowedValues">
                 <list>
                     <value></value>
@@ -41,20 +41,20 @@
 
     <types>
         <!--
-            ACME Enterprise-wide Document root type.
+            GEDfácil Enterprise-wide Document root type.
             All other custom document types would extend this one.
         -->
-        <type name="acme:document">
-            <title>Sample Document Type</title>
+        <type name="gf:document">
+            <title>GEDfácil Document Type</title>
             <parent>cm:content</parent>
             <properties>
-                <property name="acme:documentId">
+                <property name="gf:documentId">
                     <title>Document Identification Number</title>
                     <type>d:text</type>
                 </property>
             </properties>
             <mandatory-aspects>
-                <aspect>acme:securityClassified</aspect>
+                <aspect>gf:securityClassified</aspect>
             </mandatory-aspects>
         </type>
     </types>
@@ -63,11 +63,11 @@
         <!-- A document can have security classification applied and
              faceted search is specifically enabled for best performance and we change
              default index config to not tokenize the value. -->
-        <aspect name="acme:securityClassified">
-            <title>ACME Security Classified</title>
+        <aspect name="gf:securityClassified">
+            <title>GEDfácil Security Classified</title>
             <description>Content has been security classified</description>
             <properties>
-                <property name="acme:securityClassification">
+                <property name="gf:securityClassification">
                     <type>d:text</type>
                     <index enabled="true">
                         <atomic>true</atomic>
@@ -75,7 +75,7 @@
                         <tokenised>false</tokenised>
                     </index>
                     <constraints>
-                        <constraint ref="acme:securityClassificationOptions"/>
+                        <constraint ref="gf:securityClassificationOptions"/>
                     </constraints>
                 </property>
             </properties>

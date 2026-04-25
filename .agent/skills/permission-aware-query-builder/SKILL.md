@@ -15,7 +15,8 @@ Review generated query code for potential ACL bypass issues.
 3. **SearchService queries** — verify `SearchParameters` includes authority context when needed
 4. **`AuthenticationUtil.runAsSystem`** — flag any query executed inside `runAsSystem` as a potential security issue unless explicitly justified
 5. **`sys_acl` / `sys_racl`** — when using Search Enterprise (Elasticsearch), verify that ACL fields are included in the search index configuration
-6. **Solr AFTS queries** — respect `fts.alfresco.defaultNamespace` setting; warn if queries hardcode node refs
+6. **Solr AFTS queries** — respect `fts.alfresco.defaultNamespace` setting; warn if queries hardcode node refs.
+7. **Transactional AFTS Queries** — Prefix quoted values with `=` (e.g. `= @cm:name:"foo"`) to force `IDENTIFIER` mode and avoid `Analysis mode not supported` errors in DB-backed queries.
 
 ## Output
 

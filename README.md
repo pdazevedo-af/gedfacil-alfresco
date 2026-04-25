@@ -1,6 +1,6 @@
-# Alfresco AIO Project - SDK 4.11.0
+# Alfresco AIO Project - SDK 4.13.0
 
-This is an All-In-One (AIO) project for Alfresco SDK 4.11.0.
+This is an All-In-One (AIO) project for Alfresco SDK 4.13.0.
 
 ## Component Versions
 

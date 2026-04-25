@@ -1,27 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <theme>
-   <title>Gedfácil (AR MINEIRA)</title>
-   <title-id>theme.gedfacil</title-id>
+   <title>GEDfácil Theme</title>
+   <title-id>theme.gedfacil.title</title-id>
    <css-tokens>
-      <!-- Primary colors -->
-      <token name="alf-main-background-color" value="#FFFFFF" />
-      <token name="alf-body-background-color" value="#f7f7f7" />
-      
-      <!-- Header -->
-      <token name="alf-header-background-color" value="#FFFFFF" />
-      <token name="alf-header-text-color" value="#333333" />
-      <token name="alf-header-menu-active-background-color" value="#444444" />
-      
-      <!-- Dashlets and panels -->
-      <token name="alf-dashlet-header-background-color" value="#565555" />
-      <token name="alf-dashlet-header-font-color" value="#FFFFFF" />
-      <token name="alf-dashlet-border-color" value="#6b6a6a" />
-      
-      <!-- Buttons and links -->
-      <token name="alf-link-color" value="#de171a" />
-      <token name="alf-primary-button-background-color" value="#de171a" />
-      <token name="alf-primary-button-text-color" value="#FFFFFF" />
-      <token name="alf-secondary-button-background-color" value="#6b6a6a" />
-      <token name="alf-secondary-button-font-color" value="#FFFFFF" />
+      <!-- Base theme to inherit from -->
+      <parent>light-theme</parent>
    </css-tokens>
 </theme>

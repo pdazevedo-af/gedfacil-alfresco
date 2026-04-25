@@ -52,7 +52,7 @@ Every service must have a `healthcheck` block with:
 
 | Bad pattern | Why it fails |
 | ----------- | ------------ |
-| `http://localhost:8080/share/page/home` | `/page/home` does not exist in Share 26.x — Spring Surf throws a 500 `Could not resolve view 'home'`; the container stays `health: starting` forever and blocks dependent services (proxy) |
+| `http://localhost:8080/share/page/home` | `/page/home` does not exist in Share 7.3 — Spring Surf throws a 500 `Could not resolve view 'home'`; the container stays `health: starting` forever and blocks dependent services (proxy) |
 | `http://localhost:8080/share/page/dashboard` | Same issue — page routes are user-session-dependent |
 
 **Correct pattern**: accept any 2xx or 3xx from the Share root (it redirects to the login page):

@@ -1,4 +1,27 @@
 <alfresco-config>
+    <!-- Custom DocLib Dependencies -->
+    <config evaluator="string-compare" condition="DocLibCustom">
+        <dependencies>
+            <js src="gedfacil/custom-dashboard.js" />
+            <css src="gedfacil/css/custom-styles.css" />
+        </dependencies>
+    </config>
+
+    <!-- Desativar dashlet Iniciar para todos -->
+    <config evaluator="string-compare" condition="Dashlets">
+        <dashlets>
+            <enabled>
+                <dashlet id="getting-started" enabled="false"/>
+            </enabled>
+        </dashlets>
+    </config>
+
+    <!-- Idioma fixo: Somente Português (Brasil) -->
+    <config evaluator="string-compare" condition="Languages" replace="true">
+        <languages>
+            <language locale="pt_BR">Português (Brasil)</language>
+        </languages>
+    </config>
 
     <config evaluator="string-compare" condition="WebFramework">
         <web-framework>

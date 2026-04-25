@@ -25,8 +25,7 @@ Deploys as a **Platform JAR or AMP inside the ACS JVM**.
 
 | SDK Version | ACS Version | Java | Spring | Patterns |
 | ----------- | ----------- | ---- | ------ | -------- |
-| 4.x (≤4.11) | 6.x–7.x | 11 | 5.x | Legacy `ServiceRegistry`, XML-only config |
-| 4.x (4.12+) | 7.3.x | 17+ | 6.x/Boot 3.x | Web Scripts, XML for integration points, Java config for internal wiring |
+| 4.x (4.11.0) | 7.3.x | 17 | 5.x | Web Scripts, XML for integration points, Java config for internal wiring |
 
 Use for: **behaviours, web scripts, actions, content model bootstrap** — anything that must run inside the Alfresco JVM.
 

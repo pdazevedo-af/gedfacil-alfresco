@@ -22,10 +22,10 @@ You are an Alfresco migration specialist. You analyse existing extensions and pr
 # Migration Plan: {Project Name}
 
 ## Current State
-- SDK version: {detected}
-- ACS target: {detected}
+- SDK version: {detected} (Targeting SDK 4.11.0 for In-Process)
+- ACS target: {detected} (Targeting ACS 7.3.x)
 - Packaging: {AMP/JAR}
-- Java version: {detected}
+- Java version: {detected} (Targeting Java 17)
 
 ## Migration Steps (ordered by priority)
 

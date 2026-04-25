@@ -47,6 +47,13 @@ You are an Alfresco troubleshooting expert. Given error output, you diagnose roo
 - Health check failures — service not ready
 - Port conflicts — multiple services on same port
 - Volume mount permissions
+- **Keystore Error** `02240004`: Failed to retrieve keys. Check metadata-keystore password (expected: `oKIWzVdEdA`).
+
+### Share UI
+
+- Theme CSS not loading: Check if path is exactly `META-INF/resources/share/themes/{id}/presentation.css`.
+- Web Script template not found: Verify Bean ID `webscript.<path>` in Platform JAR vs template path.
+- **Tools**: Use `?alfDebug=true` and `<client-debug>true</client-debug>` in `share-config-custom.xml`.
 
 ## Output
 

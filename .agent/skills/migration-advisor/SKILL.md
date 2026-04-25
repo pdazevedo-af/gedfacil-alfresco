@@ -20,6 +20,8 @@ Scan Alfresco extension code for deprecated API usage and suggest modern replace
 | Alfresco Explorer (JSF) customizations | ACA/ADW extensions | ACS 6.0+ |
 | CMIS 1.0 | CMIS 1.1 or REST API v1 | ACS 5.2+ |
 | Lucene query syntax | AFTS or CMIS query | ACS 4.0+ |
+| `@prefix:prop:"val"` | `= @prefix:prop:"val"` (Prefix with `=`) | Transactional AFTS |
+| `SDK 4.x (4.13.0)` | `SDK 4.11.0` | For ACS 7.3 parity |
 
 ## Output
 

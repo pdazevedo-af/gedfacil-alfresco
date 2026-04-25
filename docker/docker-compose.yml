@@ -24,6 +24,7 @@ services:
         -Dsolr.sharedSecret=secret
         -Dsample.site.disabled=true
         -Dmessaging.broker.url=\"failover:(nio://gedfacil-alfresco-activemq:61616)?timeout=3000&jms.useCompression=true\"
+        -Dlog4j2.configurationFile=file:/usr/local/tomcat/shared/classes/alfresco/extension/dev-log4j2.properties
         "
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
     ports:
@@ -32,7 +33,14 @@ services:
     volumes:
       - gedfacil-alfresco-acs-volume:/usr/local/tomcat/alf_data
     depends_on:
-      - gedfacil-alfresco-postgres
+      gedfacil-alfresco-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/alfresco/api/-default-/public/alfresco/versions/1/probes/-ready-"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+      start_period: 60s
   gedfacil-alfresco-postgres:
     image: postgres:16.5
     environment:
@@ -44,6 +52,11 @@ services:
       - "${postgres.port}:5432"
     volumes:
       - gedfacil-alfresco-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alfresco -d alfresco"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   gedfacil-alfresco-ass:
     image: alfresco/alfresco-search-services:2.0.15
     environment:
@@ -67,6 +80,11 @@ services:
         - 5672:5672 # AMQP
         - 61616:61616 # OpenWire
         - 61613:61613 # STOMP
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8161/admin/"]
+        interval: 20s
+        timeout: 10s
+        retries: 3
 
 volumes:
   gedfacil-alfresco-acs-volume:

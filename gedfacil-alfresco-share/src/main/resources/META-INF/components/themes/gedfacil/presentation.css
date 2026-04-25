@@ -1,0 +1,90 @@
+/* =============================================================================
+   Gedfácil Theme - presentation.css
+   Tema visual GEDfácil (AR MINEIRA) para Alfresco Share
+   ============================================================================= */
+
+/* Importa o tema base (Light) para garantir funcionalidade total - Removido: agora tratado pelo parent-theme no XML */
+
+/* --- Logo do tema --- */
+.alfresco-share .theme-company-logo {
+    background-image: url(images/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 40px;
+}
+
+/* =============================================================================
+   HEADER - Fundo cinza escuro com barra vermelha inferior
+   ============================================================================= */
+
+.alf-header,
+.alfresco-header-Header,
+.alfresco-header-AlfHeader,
+.navigation-bar,
+#HEADER_BAR {
+    background-color: #565555 !important;
+    border-bottom: 4px solid #de171a !important;
+}
+
+.alf-header .alf-menu-bar,
+.alfresco-header-AlfMenuBar,
+.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar {
+    background-color: #565555 !important;
+}
+
+.alf-header .alf-menu-bar .alf-menu-bar-item,
+.alfresco-header-AlfMenuBar .alf-menu-bar-item,
+.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item {
+    color: #FFFFFF !important;
+}
+
+.alf-header .alf-menu-bar .alf-menu-bar-item:hover,
+.alfresco-header-AlfMenuBar .alf-menu-bar-item:hover,
+.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item:hover {
+    background-color: #6b6a6a !important;
+}
+
+.alf-header .alf-menu-bar .alf-menu-bar-item.selected,
+.alfresco-header-AlfMenuBar .alf-menu-bar-item.selected,
+.alfresco-header-AlfHeader .alfresco-menus-AlfMenuBar .alf-menu-bar-item.selected,
+.alf-header .alf-menu-bar .alf-menu-bar-item.alf-selected-item,
+.alfresco-header-AlfMenuBar .alf-menu-bar-item.alf-selected-item {
+    background-color: #444444 !important;
+}
+
+.alf-header .dijitMenuPopup,
+.alfresco-header-AlfHeader .dijitMenuPopup,
+.alf-header .alf-menu-group,
+.alfresco-header-AlfHeader .alf-menu-group {
+    background-color: #565555 !important;
+    border: 1px solid #6b6a6a !important;
+}
+
+.alf-header .alf-menu-group .alf-menu-group-item,
+.alfresco-header-AlfHeader .alf-menu-group .alf-menu-group-item {
+    color: #FFFFFF !important;
+}
+
+.alf-header a,
+.alfresco-header-AlfHeader a,
+#HEADER_BAR a {
+    color: #FFFFFF !important;
+}
+
+/* =============================================================================
+   FOOTER - Fundo cinza escuro com barra vermelha superior
+   ============================================================================= */
+
+.sticky-footer, .footer {
+    background-color: #565555ed !important;
+    color: #FFFFFF !important;
+    border-top: 4px solid #de171a !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+}
+
+.footer a {
+    color: #FFFFFF !important;
+}

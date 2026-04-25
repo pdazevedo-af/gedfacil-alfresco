@@ -1,3 +1,4 @@
+<@markup id="html">
 <style>
    /* Limpeza e Centralização do Rodapé */
    .footer {
@@ -46,3 +47,4 @@
       <div class="brand-text">${msg("label.brand")}</div>
    </div>
 </div>
+</@>

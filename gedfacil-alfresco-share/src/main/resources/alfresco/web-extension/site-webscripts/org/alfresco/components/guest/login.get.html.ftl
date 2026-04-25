@@ -92,10 +92,10 @@
          <div class="error">${msg("message.loginautherror")}</div>
          <#else>
          <script type="text/javascript">//<![CDATA[
-            <#assign cookieHeadersConfig = config.scoped["COOKIES"] />
-            <#if cookieHeadersConfig?? && (cookieHeadersConfig.secure.getValue() == "true" || cookieHeadersConfig.secure.getValue() == "false")>
+            <#assign cookieHeadersConfig = (config.scoped["COOKIES"])! />
+            <#if cookieHeadersConfig?? && cookieHeadersConfig.secure?? && (cookieHeadersConfig.secure.getValue() == "true" || cookieHeadersConfig.secure.getValue() == "false")>
                Alfresco.constants.secureCookie = ${cookieHeadersConfig.secure.getValue()};
-               Alfresco.constants.sameSite = "${cookieHeadersConfig.sameSite.getValue()}";
+               Alfresco.constants.sameSite = "${(cookieHeadersConfig.sameSite.getValue())!''}";
             </#if>
 
             var cookieDefinition = "_alfTest=_alfTest; Path=/;";
@@ -120,12 +120,12 @@
       </#if>
       
       <@markup id="form">
-         <form id="${el}-form" accept-charset="UTF-8" method="post" action="${loginUrl}" class="form-fields login">
+         <form id="${el}-form" accept-charset="UTF-8" method="post" action="${loginUrl!''}" class="form-fields login">
             <@markup id="fields">
-            <input type="hidden" id="${el}-success" name="success" value="${successUrl?replace("@","%40")?html}"/>
-            <input type="hidden" name="failure" value="${failureUrl?replace("@","%40")?html}"/>
+            <input type="hidden" id="${el}-success" name="success" value="${(successUrl!'')?replace("@","%40")?html}"/>
+            <input type="hidden" name="failure" value="${(failureUrl!'')?replace("@","%40")?html}"/>
             <div class="form-field">
-               <input type="text" id="${el}-username" name="username" maxlength="255" value="<#if lastUsername??>${lastUsername?html}</#if>" placeholder="${msg("label.username")}" />
+               <input type="text" id="${el}-username" name="username" maxlength="255" value="${(lastUsername!'')?html}" placeholder="${msg("label.username")}" />
             </div>
             <div class="form-field">
                <input type="password" id="${el}-password" name="password" maxlength="255" placeholder="${msg("label.password")}" />
@@ -146,14 +146,18 @@
                 setTimeout(function()
                 {
                     var xhr;
+                    <#if dependencies??>
                     <#list dependencies as dependency>
                        xhr = new XMLHttpRequest();
                        xhr.open('GET', '<@checksumResource src="${url.context}/res/${dependency}"/>');
                        xhr.send('');
                     </#list>
+                    </#if>
+                    <#if images??>
                     <#list images as image>
                        new Image().src = "${url.context?js_string}/res/${image}";
                     </#list>
+                    </#if>
                 }, 1000);
             };
          //]]></script>

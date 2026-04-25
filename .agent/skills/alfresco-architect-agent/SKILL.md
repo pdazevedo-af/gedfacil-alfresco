@@ -50,7 +50,11 @@ Proposed
 
 - Target ACS 7.3, Java 17+, Spring Boot 3.x
 - Choose the SDK based on requirements:
-  - **In-Process SDK 4.1.0** (`alfresco-sdk-aggregator`) — for behaviours, web scripts, actions, content model bootstrap; deployed as Platform JAR inside ACS. Use AMP only when the extension must bundle third-party libraries not on the Alfresco classpath.
+  - **In-Process SDK 4.11.0** (`alfresco-sdk-aggregator`) — for behaviours, web scripts, actions, content model bootstrap; deployed as Platform JAR inside ACS. Use AMP only when the extension must bundle third-party libraries not on the Alfresco classpath.
   - **Out-of-Process SDK 5.2** (`alfresco-java-sdk`) — for event listeners, external integrations, async processing; deployed as a separate Spring Boot service alongside ACS.
   - Both SDKs may coexist in the same project when requirements span synchronous and asynchronous concerns.
+- **API Design Patterns**:
+  - Web Scripts Java: Bean ID must follow `webscript.<package>.<id>.<method>`.
+  - Share Themes: Assets must be in `META-INF/resources/share/themes/{id}/`.
+  - Aikau: Prefer extension modules and `widgetUtils.findObject` for header customization.
 - Follow all AGENTS.md conventions

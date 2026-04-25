@@ -8,15 +8,15 @@ This file defines the conventions that every AI agent must follow when generatin
 
 | Component | Version | Notes |
 | :--- | :--- | :--- |
-| Alfresco Content Services (ACS) | 7.3 | Community Edition |
+| Alfresco Content Services (ACS) | 7.3.x | Community Edition |
 | Maven In-Process SDK | 4.13.0 (`alfresco-sdk-aggregator`) | Platform JAR, deployed inside ACS |
-| Spring Boot Out-of-Process SDK | 5.2.x | External Spring Boot app (compatible with Java 17) |
+| Spring Boot Out-of-Process SDK | 5.2 | External Spring Boot app (compatible with Java 17) |
 | Java | 17 | Required by ACS 7.3 |
-| Maven | 3.9+ | Build tool |
+| Maven | 3.9 | Build tool |
 | Docker Compose | v2 | No `version:` key in compose files |
-| PostgreSQL | 16.x | Default database for 7.3 |
-| Apache ActiveMQ | 5.18.x | Event messaging |
-| Search Services (Solr) | 2.1.x | Community default |
+| PostgreSQL | 16.5 | Default database for 7.3 |
+| Apache ActiveMQ | 5.18 | Event messaging |
+| Search Services (Solr) | 2.0.15 | Community default |
 | Transform Service | 3.0.x | AIO (all-in-one) for development |
 
 ### Docker Images (ACS 7.3 Community)
@@ -24,9 +24,9 @@ This file defines the conventions that every AI agent must follow when generatin
 ```text
 alfresco/alfresco-content-repository-community:7.3.0
 alfresco/alfresco-share:7.3.0
-alfresco/alfresco-search-services:2.1.x
+alfresco/alfresco-search-services:2.0.15
 postgres:16.5
-docker.io/alfresco/alfresco-activemq:5.18.x
+docker.io/alfresco/alfresco-activemq:5.18
 alfresco/alfresco-transform-core-aio:3.0.x
 ```
 
@@ -86,13 +86,13 @@ Key dependencies:
 </dependency>
 ```
 
-### Spring Boot Out-of-Process SDK Coordinates (ACS 26.1)
+### Spring Boot Out-of-Process SDK Coordinates (ACS 7.3)
 
 ```xml
 <parent>
     <groupId>org.alfresco</groupId>
     <artifactId>alfresco-java-sdk</artifactId>
-    <version>7.2.0</version>
+    <version>5.2.0</version>
 </parent>
 ```
 
@@ -188,7 +188,7 @@ module.id={groupId}.{artifactId}
 module.title={Human Readable Title}
 module.description={Description}
 module.version=1.0.0
-module.repo.version.min=26.1
+module.repo.version.min=7.3
 ```
 
 ---
@@ -224,7 +224,10 @@ module.repo.version.min=26.1
 
 - **Bean IDs**: `{prefix}.{beanName}` — e.g. `acme.invoiceBehaviour`
 - **Action bean parent**: `action-executer`
+- **Action bean naming**: Must have the `-executer` suffix if the parent is `action-executer` — e.g. `acme.invoice-executer`.
 - **Dictionary bootstrap parent**: `dictionaryModelBootstrap`
+- **Web Script Java beans**: The Bean ID MUST follow the format `webscript.<package-path>.<script-id>.<http-method>`.
+  - Example: `webscript.com.acme.api.invoices.get` for a script at `/api/acme/invoices` (GET).
 
 ### Web Script API Paths
 
@@ -495,7 +498,7 @@ ActiveMQ 5.18.x requires authentication. There are two distinct layers of variab
 
 ```yaml
 activemq: 
-  image: docker.io/alfresco/alfresco-activemq:5.18.x
+  image: docker.io/alfresco/alfresco-activemq:5.18
   environment: 
     ACTIVEMQ_OPTS: "-Xms512m -Xmx1g"
     ACTIVEMQ_USERNAME: ${ACTIVEMQ_USER}      # image expects ACTIVEMQ_USERNAME
@@ -521,7 +524,7 @@ environment:
 
 ### Technology
 
-ACS 26.1 embeds **Activiti 5.22.x** (via `alfresco-activiti-embedded`). All Activiti classes are available through `alfresco-repository` (`provided` scope) — no extra POM dependency is needed.
+ACS 7.3 embeds **Activiti 5.22.x** (via `alfresco-activiti-embedded`). All Activiti classes are available through `alfresco-repository` (`provided` scope) — no extra POM dependency is needed.
 
 **Do NOT** use Activiti 6 or Flowable APIs (`org.flowable.*`). The engine ID registered with Alfresco's `WorkflowService` is `activiti`.
 
@@ -618,6 +621,9 @@ Always discover `processDefinitionId` dynamically from `GET /process-definitions
 | Share config root | `src/main/resources/alfresco/web-extension/` |
 | Main Share form config | `src/main/resources/alfresco/web-extension/share-config-custom.xml` |
 | Surf extension metadata | `src/main/resources/alfresco/web-extension/site-data/extensions/{extensionName}.xml` |
+| Share Theme definition | `src/main/resources/alfresco/web-extension/site-data/themes/{theme-id}.xml` |
+| Share Theme CSS | `src/main/resources/META-INF/resources/share/themes/{theme-id}/presentation.css` |
+| Share Theme Images | `src/main/resources/META-INF/resources/share/themes/{theme-id}/images/` |
 | Share message bundles | `src/main/resources/alfresco/web-extension/messages/{bundle}.properties` |
 | Surf/Aikau web-tier web scripts | `src/main/resources/alfresco/site-webscripts/{path}/...` |
 | Java evaluators/helpers | `src/main/java/{package}/share/...` |
@@ -629,6 +635,8 @@ Always discover `processDefinitionId` dynamically from `GET /process-definitions
 - **Surf extension files**: kebab-case or lower camel names that match page/component IDs consistently
 - **Dashlet and page IDs**: stable, lowercase, project-prefixed identifiers
 - **Message bundle keys**: project-prefixed and grouped by page/component/form purpose
+- **Aikau Header Customization**: Use `widgetUtils.findObject(model.jsonModel.widgets, "id", "SHARE_HEADER")` to locate the header object in the JSON model.
+- **Aikau Styling**: Aikau components use **LESS** (`variables.less`), while legacy YUI components use standard **CSS**.
 
 ### Share Guidance
 
@@ -640,6 +648,8 @@ Always discover `processDefinitionId` dynamically from `GET /process-definitions
 - Prefer extension modules and component insertion over direct replacement of existing Share pages unless replacement is explicitly required
 - For Aikau work, prefer built-in widgets and explicit page-model composition before generating custom widget modules
 - Keep Aikau page-model IDs, JS module paths, and message keys stable across descriptors, model scripts, and widget modules
+- **Debugging**: Use `?alfDebug=true` in the Share URL to enable the Surf component inspector.
+- **Client Debug**: Enable `<client-debug>true</client-debug>` in `share-config-custom.xml` to load uncompressed JavaScript for easier troubleshooting.
 
 ### Share Forbidden Patterns
 
@@ -647,8 +657,8 @@ Always discover `processDefinitionId` dynamically from `GET /process-definitions
 | :--- | :--- | :--- |
 | Writing Share config into the Platform JAR project | Breaks deployment boundaries and packaging clarity | Put Share artefacts in the Share project/module |
 | Writing repo artefacts into the Share project | Share cannot deploy repo module resources | Keep repo code under `alfresco/module/...` in the Platform JAR |
-| Treating Share as the default UI for ACS 26.1 | Misstates the modern product direction | Use Share only when the requirement explicitly targets it |
-| Using `/share/page/home` as a healthcheck target | Share 26.x does not expose it reliably | Use the Share root URL as documented in `commands/docker-compose.md` |
+| Treating Share as the default UI for ACS 7.3 | Misstates the modern product direction | Use Share only when the requirement explicitly targets it |
+| Using `/share/page/home` as a healthcheck target | Share 7.3 does not expose it reliably | Use the Share root URL as documented in `commands/docker-compose.md` |
 | Generating inconsistent Surf page/component/module IDs | Breaks Share page wiring and extension-module activation | Keep IDs and URLs stable across extension metadata and web scripts |
 | Replacing built-in Share pages when extension modules would suffice | Increases fragility and upgrade risk | Prefer additive extension modules and component insertion |
 | Generating unnecessary custom Aikau widgets when built-in widgets suffice | Increases maintenance cost and JS surface area | Prefer widget composition and existing Aikau services first |
@@ -683,6 +693,7 @@ These patterns must **never** appear in generated code. Actively check for and r
 | Synchronous external HTTP calls inside service tasks or task listeners | Runs inside the ACS transaction; timeouts cause transaction rollback and workflow state corruption | Use Alfresco Action Service to queue async work; or use a separate boundary event for external integration |
 | Registering BPMN files via `dictionaryModelBootstrap` | `dictionaryModelBootstrap` does not know about Activiti's process engine — BPMN files are silently ignored | Use a separate `workflowDeployer` bean |
 | Omitting `bpm` import from workflow model XML | Workflow task types extend `bpm:startTask` or `bpm:activitiOutcomeTask` — the import is mandatory | Always add `<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm"/>` |
+| Custom Share Theme paths outside `share/themes/{id}/` | Paths like `META-INF/resources/custom/` for theme CSS/images will not be resolved correctly by the Share engine | Always use `META-INF/resources/share/themes/{theme-id}/` for theme assets |
 
 ---
 

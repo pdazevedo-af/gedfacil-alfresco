@@ -1,0 +1,70 @@
+<extension>
+    <modules>
+        <module>
+            <id>Gedfacil Dashboard Enforcement</id>
+            <version>1.0</version>
+            <auto-deploy>true</auto-deploy>
+            <evaluator type="org.alfresco.web.evaluator.IsAdminEvaluator" negate="true"/>
+            <component-extensions>
+                <!-- 
+                    This module enforces a specific dashboard layout for non-admin users.
+                    It removes common dashlets and ensures only "My Sites" is visible.
+                -->
+                
+                <!-- Remove Getting Started and others from the first column -->
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-1-1</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-1-2</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-1-3</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+
+                <!-- Remove dashlets from the second column -->
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-2-1</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-2-2</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-2-3</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+
+                <!-- Remove dashlets from the third column (if exists) -->
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-3-1</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-3-2</region-id>
+                    <control-operation>remove</control-operation>
+                </component-extension>
+
+                <!-- Force "My Sites" (Meus sites) in the first region -->
+                <component-extension>
+                    <page-id>user-dashboard</page-id>
+                    <region-id>dashlet-1-1</region-id>
+                    <control-operation>add</control-operation>
+                    <url>/components/dashlets/my-sites</url>
+                </component-extension>
+            </component-extensions>
+        </module>
+    </modules>
+</extension>
